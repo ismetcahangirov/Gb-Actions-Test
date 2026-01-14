@@ -11,3 +11,6 @@ jobs:
     steps:
       - name: Write Messagge
         run: echo "hello"
+
+      - name: Date
+        run: date
