@@ -11,13 +11,19 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: true
+      matrix:
+        version: [18, 20]
+        
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Node qurasdir
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: ${{ matrix.version }}
           cache: "npm"
 
       - name: Paketleri yukle
@@ -27,3 +33,10 @@ jobs:
         run: npm run build
       - name: Lint
         run: npm run lint
+
+      - name: Artifact download et dist
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-node-${{ matrix.version }}
+          path: dist/
+          if-no-files-found: warn
