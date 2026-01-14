@@ -31,11 +31,12 @@ jobs:
 
       - name: Build
         run: npm run build
+      
       - name: Lint
         run: npm run lint
 
-      - name: Artifact download et dist
-        uses: actions/download-artifact@v3
+      - name: Artifact upload et dist
+        uses: actions/upload-artifact@v4
         with:
           name: dist-node-${{ matrix.version }}
           path: dist/
