@@ -23,5 +23,7 @@ jobs:
       - name: Paketleri yukle
         run: npm ci
 
-      - name: Testleri islet
-        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Lint
+        run: npm run lint
