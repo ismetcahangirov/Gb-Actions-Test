@@ -2,21 +2,29 @@ name: First Workflow
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
-
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main  
+  workflow_dispatch: 
+    
 jobs:
-  inspects:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Load Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show Repo Files
-        run: ls -la
-      - name: Current folder
-        run: pwd
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cashe: 'npm'
 
-      - name: Last 3 commits
-        run: git log -3 --oneline
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
