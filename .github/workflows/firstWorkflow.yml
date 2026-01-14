@@ -2,15 +2,18 @@ name: First Workflow
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
-  hello:
+  inspects:
     runs-on: ubuntu-latest
-    steps:
-      - name: Write Messagge
-        run: echo "hello"
 
-      - name: Date
-        run: date
+    steps:
+      - name: Load Code
+        uses: actions/checkout@v4
+
+      - name: Show Repo Files
+        run: ls -la
+      - name: Current folder
+        run: pwd
