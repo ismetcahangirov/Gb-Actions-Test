@@ -1,30 +1,27 @@
-name: First Workflow
+name: Node CI
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
-    branches:
-      - main  
-  workflow_dispatch: 
-    
+    branches: ["main"]
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Node qurasdir
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cacdhe: 'npm'
+          node-version: "20"
+          cache: "npm"
 
-      - name: Install dependencies
-        run: npm install
+      - name: Paketleri yukle
+        run: npm ci
 
-      - name: Run tests
-        run: npm test
+      - name: Testleri islet
+        run: npm tests
